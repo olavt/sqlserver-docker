@@ -88,7 +88,7 @@ $ sudo usermod -aG docker <your-username>
 
 Logout from the current user and login again for the above command to take effect.
 
-# Prepare the filesystem for the MongoDB data files
+# Prepare the filesystem for the SQL Server data files
 
 List the disks on the server:
 
