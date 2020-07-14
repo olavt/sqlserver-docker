@@ -118,13 +118,13 @@ Create a new partition by issuing the following command:
 $ sudo fdisk /dev/sdb
 ```
 
+Enter 'n' at the fdisk command prompt to add a new partition. Select defaults for all the inputs and remember to select "w" when returning to the fdisk command prompt in order to write table to disk and exit.
+
 Format the partition as XFS:
 
 ```
 sudo mkfs.xfs -L sqlserver /dev/sdb1
 ```
-
-Enter 'n' at the fdisk command prompt to add a new partition. Select defaults for all the inputs and remember to select "w" when returning to the fdisk command prompt in order to write table to disk and exit.
 
 ## Mount the new filesystem
 
@@ -165,7 +165,7 @@ sudo mkdir /mnt/sqlserver/secrets
 # Run SQL Server 2019 in a Docker container
 
 ```
-$ docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>' -p 1433:1433 -v /mnt/sqlserver/data:/var/opt/mssql/data -v /mnt/sqlserver/log:/var/opt/mssql/log -v /mnt/sqlserver/secrets:/var/opt/mssql/secrets -u 0:0 -d mcr.microsoft.com/mssql/server:2019-latest
+$ docker run --env 'ACCEPT_EULA=Y' --env 'MSSQL_SA_PASSWORD=<YourStrong!Passw0rd>' --env MSSQL_AGENT_ENABLED=True -p 1433:1433 -v /mnt/sqlserver/data:/var/opt/mssql/data -v /mnt/sqlserver/log:/var/opt/mssql/log -v /mnt/sqlserver/secrets:/var/opt/mssql/secrets -u 0:0 -d --restart always mcr.microsoft.com/mssql/server:2019-latest
 ```
 
 Now you should be able to connect to your server by using SQL Server Management Studio
